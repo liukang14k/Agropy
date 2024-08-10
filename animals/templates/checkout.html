@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <h1>Checkout</h1>
+    <p>Total: {{ total }}</p>
+    <form action="{% url 'checkout' %}" method="post" id="payment-form">
+        {% csrf_token %}
+        <script
+            src="https://checkout.stripe.com/checkout.js"
+            class="stripe-button"
+            data-key="{{ public_key }}"
+            data-description="Pagamento por animais"
+            data-amount="{{ total|floatformat:2|mul:100 }}"
+            data-locale="auto">
+        </script>
+    </form>
+</body>
+</html>
